@@ -85,7 +85,7 @@ plus_right_zero =
     Lambda "x" Nat
         (ElimNat
             (Lambda "x" Nat (Application (Application (Application same Nat) (Var "x")) (Application (Application plus (Var "x")) Zero)))
-            (Lambda "P" (Fun "_1" Nat Star) (Lambda "x2" Nat (Var "x2"))) 
+            (Lambda "P" (Fun "_1" Nat Star) (Lambda "x2" Star (Var "x2"))) 
             (Lambda "n" Nat
                 (Lambda "x1" (Fun "_" (Fun "_2" Nat Star) Nat)
                     (Lambda "P" (Fun "_1" Nat Star)
@@ -99,7 +99,7 @@ plus_right_zero =
 -- Proof that x + (y + 1) == 1 + x + y
 plus_right_suc = Lambda "x" Nat ( Lambda "y" Nat ( ElimNat
 	(Lambda "x" Nat (Application (Application (Application same Nat) (Succ (Application (Application plus (Var "x")) (Var "y")))) (Application (Application plus (Var "x")) (Succ (Var "y")))))
-	(Lambda "P" (Fun "_1" Nat Star) (Lambda "x2" Nat (Var "x2"))) 
+	(Lambda "P" (Fun "_1" Nat Star) (Lambda "x2" Star (Var "x2"))) 
 	(Lambda "n" Nat
         (Lambda "x1" (Fun "_" (Fun "_2" Nat Star) Nat)
             (Lambda "P" (Fun "_1" Nat Star)
@@ -162,6 +162,6 @@ reflthree = (Application (Application refl Nat) (Succ (Succ (Succ Zero))))
 
 main :: IO ()
 
-main = putStrLn $ case reduce [] $ reflthree of 
+main = putStrLn $ case reduce [] $ plus_comm of 
     Right x -> trace (show x) $ show $ type_check [] x
     Left y -> y
