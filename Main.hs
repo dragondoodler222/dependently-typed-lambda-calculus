@@ -144,7 +144,7 @@ mul =
         (ElimNat 
             (Lambda "_" Nat Nat)  
             Zero                  
-            (Lambda "x" Nat (Lambda "acc" Nat (Application (Application add (Var "n")) (Var "acc")))) 
+            (Lambda "x" Nat (Lambda "acc" Nat (Application (Application plus (Var "n")) (Var "acc")))) 
             (Var "m")   
         )
     )
